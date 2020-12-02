@@ -8,9 +8,16 @@ use PHPUnit\Framework\TestCase;
 class ReportRepairTest extends TestCase
 {
     /** @test */
-    public function additionResultIs2020()
+    public function addition2NumbersResultIs2020()
     {
-        $result = ReportRepair::findNumbersWhereSumEquals2020($this->getTestData());
+        $result = ReportRepair::find2NumbersWhereSumEquals2020($this->getTestData());
+        $this->assertEquals(2020, array_sum($result));
+    }
+
+    /** @test */
+    public function addition3NumbersResultIs2020()
+    {
+        $result = ReportRepair::find3NumbersWhereSumEquals2020($this->getTestData());
         $this->assertEquals(2020, array_sum($result));
     }
 
@@ -31,9 +38,16 @@ class ReportRepairTest extends TestCase
     }
 
     /** @test */
-    public function getResult()
+    public function getResult2Numbers()
     {
-        $result = ReportRepair::result($this->getTestData());
+        $result = ReportRepair::result($this->getTestData(), 2);
         $this->assertEquals(211899, $result);
+    }
+
+    /** @test */
+    public function getResult3Numbers()
+    {
+        $result = ReportRepair::result($this->getTestData(), 3);
+        $this->assertEquals(275765682, $result);
     }
 }
