@@ -6,6 +6,10 @@ namespace Opmvpc\Advent\Day1;
 
 class ReportRepair
 {
+    /**
+     * @param array<int> $data
+     * @return array<int>
+     */
     public static function findNumbersWhereSumEquals2020(array $data): array
     {
         $result = [];
@@ -21,11 +25,19 @@ class ReportRepair
         return $result;
     }
 
+    /**
+     * @param array<int> $data
+     * @return int
+     */
     public static function multiplication(array $data): int
     {
         return $data[0] * $data[1];
     }
 
+    /**
+     * @param array<int> $data
+     * @return int
+     */
     public static function result(array $data): int
     {
         $foundNumbers = static::findNumbersWhereSumEquals2020($data);
