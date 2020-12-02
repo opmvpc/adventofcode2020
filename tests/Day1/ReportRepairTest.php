@@ -1,10 +1,10 @@
 <?php
 
-namespace Spatie\Skeleton\Tests;
+namespace Opmvpc\Advent\Tests\Day1;
 
 use PHPUnit\Framework\TestCase;
 
-class ExampleTest extends TestCase
+class ReportRepairTest extends TestCase
 {
     /** @test */
     public function true_is_true()
