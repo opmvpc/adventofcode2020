@@ -38,7 +38,7 @@ class TobogganTrajectory
             [1, 2],
         ];
 
-        $counts = array_map(fn ($step) => static::findTreeCountRec($data, 0, 0, $step[0], $step[1], 0), $steps);
+        $counts = array_map(fn (array $step) => static::findTreeCountRec($data, 0, 0, $step[0], $step[1], 0), $steps);
 
         return array_reduce($counts, fn (int $acc, int $count) => $acc * $count, 1);
     }

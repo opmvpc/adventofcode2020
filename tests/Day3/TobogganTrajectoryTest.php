@@ -1,6 +1,6 @@
 <?php
 
-namespace Opmvpc\Advent\Tests\Day1;
+namespace Opmvpc\Advent\Tests\Day3;
 
 use Opmvpc\Advent\Day3\TobogganTrajectory;
 use Opmvpc\Advent\Day3\TobogganTrajectoryParser;
