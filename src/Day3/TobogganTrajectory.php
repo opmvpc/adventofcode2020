@@ -62,13 +62,6 @@ class TobogganTrajectory
             return $count;
         }
 
-        $x += $xStep;
-        $y += $yStep;
-
-        if ($x >= static::$maxX) {
-            $x = $x - static::$maxX;
-        }
-
-        return static::findTreeCountRec($data, $x, $y, $xStep, $yStep, $count);
+        return static::findTreeCountRec($data, ($x + $xStep) % static::$maxX, $y + $yStep, $xStep, $yStep, $count);
     }
 }
