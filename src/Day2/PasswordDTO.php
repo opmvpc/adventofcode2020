@@ -4,6 +4,10 @@ declare(strict_types=1);
 
 namespace Opmvpc\Advent\Day2;
 
+/**
+ * @psalm-immutable
+ * @package Opmvpc\Advent\Day2
+ */
 class PasswordDTO
 {
     private int $min;

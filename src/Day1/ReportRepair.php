@@ -8,6 +8,22 @@ class ReportRepair
 {
     /**
      * @param array<int> $data
+     * @param int $numbersCount
+     * @return int
+     */
+    public static function result(array $data, int $numbersCount): int
+    {
+        if ($numbersCount === 2) {
+            $foundNumbers = static::find2NumbersWhereSumEquals2020($data);
+        } else {
+            $foundNumbers = static::find3NumbersWhereSumEquals2020($data);
+        }
+
+        return static::multiplication($foundNumbers);
+    }
+
+    /**
+     * @param array<int> $data
      * @return array<int>
      */
     public static function find2NumbersWhereSumEquals2020(array $data): array
@@ -53,28 +69,6 @@ class ReportRepair
      */
     public static function multiplication(array $data): int
     {
-        $result = 1;
-        foreach ($data as $number) {
-            $result *= $number;
-        }
-
-        return $result;
-    }
-
-    /**
-     * @param array<int> $data
-     * @param int $numbersCount
-     * @return int
-     */
-    public static function result(array $data, int $numbersCount): int
-    {
-        if ($numbersCount === 2) {
-            $foundNumbers = static::find2NumbersWhereSumEquals2020($data);
-        } else {
-            $foundNumbers = static::find3NumbersWhereSumEquals2020($data);
-        }
-
-
-        return static::multiplication($foundNumbers);
+        return array_reduce($data, fn (int $acc, int $number) => $acc * $number, 1);
     }
 }

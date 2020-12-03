@@ -7,6 +7,15 @@ namespace Opmvpc\Advent\Day2;
 class PasswordPhilosophy
 {
     /**
+     * @param array<int, PasswordDTO> $passwords
+     * @return int
+     */
+    public static function passwordOkCount(array $passwords): int
+    {
+        return array_reduce($passwords, fn (int $acc, PasswordDTO $passwordData) => $acc + intval(static::isPasswordOk($passwordData)), 0);
+    }
+
+    /**
      *
      * @param PasswordDTO $passwordData
      * @return bool
@@ -25,29 +34,6 @@ class PasswordPhilosophy
      */
     private static function countCharOccurence(string $charToFind, string $password): int
     {
-        $count = 0;
-        foreach (str_split($password) as $char) {
-            if ($char === $charToFind) {
-                $count++;
-            }
-        }
-
-        return $count;
-    }
-
-    /**
-     * @param array<int, PasswordDTO> $passwords
-     * @return int
-     */
-    public static function passwordOkCount(array $passwords): int
-    {
-        $count = 0;
-        foreach ($passwords as $passwordData) {
-            if (static::isPasswordOk($passwordData)) {
-                $count++;
-            }
-        }
-
-        return $count;
+        return substr_count($password, $charToFind);
     }
 }

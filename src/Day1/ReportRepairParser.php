@@ -11,8 +11,8 @@ class ReportRepairParser extends AbstractParser
     public function parse(): array
     {
         $explodedData = explode("\n", $this->fileContent);
-        $filterdData = array_filter($explodedData, fn ($number) => $number !== '');
+        $filteredData = array_filter($explodedData, fn ($number) => $number !== '');
 
-        return $filterdData;
+        return $filteredData;
     }
 }
