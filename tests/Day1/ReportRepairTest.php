@@ -3,6 +3,7 @@
 namespace Opmvpc\Advent\Tests\Day1;
 
 use Opmvpc\Advent\Day1\ReportRepair;
+use Opmvpc\Advent\Day1\ReportRepairParser;
 use PHPUnit\Framework\TestCase;
 
 class ReportRepairTest extends TestCase
@@ -30,11 +31,7 @@ class ReportRepairTest extends TestCase
 
     private function getTestData(): array
     {
-        $data = file_get_contents(__DIR__.'/ReportRepairData.txt');
-        $explodedData = explode("\n", $data);
-        $filterdData = array_filter($explodedData, fn ($number) => $number !== '');
-
-        return $filterdData;
+        return (new ReportRepairParser(__DIR__ . '/ReportRepairData.txt'))->parse();
     }
 
     /** @test */

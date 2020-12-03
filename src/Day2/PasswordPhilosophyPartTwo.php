@@ -8,13 +8,13 @@ class PasswordPhilosophyPartTwo extends PasswordPhilosophy
 {
     /**
      *
-     * @param array<string, string> $passwordData
+     * @param PasswordDTO $passwordData
      * @return bool
      */
-    public static function isPasswordOk(array $passwordData): bool
+    public static function isPasswordOk(PasswordDTO $passwordData): bool
     {
-        $firstPosIsOk = substr($passwordData['password'], intval($passwordData['min']) - 1, 1) === $passwordData['char'];
-        $secondPosIsOk = substr($passwordData['password'], intval($passwordData['max']) - 1, 1) === $passwordData['char'];
+        $firstPosIsOk = substr($passwordData->getPassword(), intval($passwordData->getMin()) - 1, 1) === $passwordData->getChar();
+        $secondPosIsOk = substr($passwordData->getPassword(), intval($passwordData->getMax()) - 1, 1) === $passwordData->getChar();
 
         return $firstPosIsOk xor $secondPosIsOk;
     }

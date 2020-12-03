@@ -8,14 +8,14 @@ class PasswordPhilosophy
 {
     /**
      *
-     * @param array<string, string> $passwordData
+     * @param PasswordDTO $passwordData
      * @return bool
      */
-    public static function isPasswordOk(array $passwordData): bool
+    public static function isPasswordOk(PasswordDTO $passwordData): bool
     {
-        $occurenceCount = static::countCharOccurence($passwordData['char'], $passwordData['password']);
+        $occurenceCount = static::countCharOccurence($passwordData->getChar(), $passwordData->getPassword());
 
-        return $occurenceCount >= $passwordData['min'] && $occurenceCount <= $passwordData['max'];
+        return $occurenceCount >= $passwordData->getMin() && $occurenceCount <= $passwordData->getMax();
     }
 
     /**
@@ -36,7 +36,7 @@ class PasswordPhilosophy
     }
 
     /**
-     * @param array<int, array<string, string>> $passwords
+     * @param array<int, PasswordDTO> $passwords
      * @return int
      */
     public static function passwordOkCount(array $passwords): int

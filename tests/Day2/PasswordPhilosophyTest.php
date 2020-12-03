@@ -2,7 +2,9 @@
 
 namespace Opmvpc\Advent\Tests\Day2;
 
+use Opmvpc\Advent\Day2\PasswordDTO;
 use Opmvpc\Advent\Day2\PasswordPhilosophy;
+use Opmvpc\Advent\Day2\PasswordPhilosophyParser;
 use Opmvpc\Advent\Day2\PasswordPhilosophyPartTwo;
 use PHPUnit\Framework\TestCase;
 
@@ -11,12 +13,12 @@ class PasswordPhilosophyTest extends TestCase
     /** @test */
     public function isPasswordOk()
     {
-        $data = [
-            'min' => 1,
-            'max' => 3,
-            'char' => 'a',
-            'password' => 'abcde',
-        ];
+        $data = new PasswordDTO(
+            1,
+            3,
+            'a',
+            'abcde',
+        );
 
         $result = PasswordPhilosophy::isPasswordOk($data);
         $this->assertTrue($result);
@@ -25,12 +27,12 @@ class PasswordPhilosophyTest extends TestCase
     /** @test */
     public function isPasswordPartTwoOk()
     {
-        $data = [
-                'min' => 1,
-                'max' => 3,
-                'char' => 'a',
-                'password' => 'abcde',
-            ];
+        $data = new PasswordDTO(
+            1,
+            3,
+            'a',
+            'abcde',
+        );
 
         $result = PasswordPhilosophyPartTwo::isPasswordOk($data);
         $this->assertTrue($result);
@@ -52,19 +54,6 @@ class PasswordPhilosophyTest extends TestCase
 
     private function getTestData(): array
     {
-        $data = file_get_contents(__DIR__.'/PasswordPhilosophyData.txt');
-        $explodedData = explode("\n", $data);
-        $finalData = [];
-        $filterdData = array_filter($explodedData, fn ($line) => $line !== '');
-        foreach ($filterdData as $line) {
-            $explodedLine = explode(" ", $line);
-            $lineData['min'] = explode("-", $explodedLine[0])[0];
-            $lineData['max'] = explode("-", $explodedLine[0])[1];
-            $lineData['char'] = substr($explodedLine[1], 0, 1);
-            $lineData['password'] = $explodedLine[2];
-            $finalData[] = $lineData;
-        }
-
-        return $finalData;
+        return (new PasswordPhilosophyParser(__DIR__ . '/PasswordPhilosophyData.txt'))->parse();
     }
 }
