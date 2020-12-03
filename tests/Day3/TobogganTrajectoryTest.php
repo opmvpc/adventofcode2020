@@ -28,4 +28,20 @@ class TobogganTrajectoryTest extends TestCase
         $result = TobogganTrajectory::findTreeCount($data);
         $this->assertEquals(234, $result);
     }
+
+    /** @test */
+    public function knownResultTreeCountsProduct()
+    {
+        $data = (new TobogganTrajectoryParser(__DIR__ . '/TobogganTrajectoryData2.txt'))->parse();
+        $result = TobogganTrajectory::findTreeCountsProducts($data);
+        $this->assertEquals(336, $result);
+    }
+
+    /** @test */
+    public function resultTreeCountsProduct()
+    {
+        $data = $this->getTestData();
+        $result = TobogganTrajectory::findTreeCountsProducts($data);
+        $this->assertEquals(5813773056, $result);
+    }
 }
