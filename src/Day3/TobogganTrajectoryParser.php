@@ -8,6 +8,9 @@ use Opmvpc\Advent\AbstractParser;
 
 class TobogganTrajectoryParser extends AbstractParser
 {
+    /**
+     * @return array<int, array<int, string>>
+     */
     public function parse(): array
     {
         $explodedData = explode("\n", $this->fileContent);

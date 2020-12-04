@@ -10,7 +10,7 @@ class TobogganTrajectory
     public static int $maxY;
 
     /**
-     * @param array<array<int, string>> $data
+     * @param array<int, array<int, string>> $data
      * @return int
      */
     public static function findTreeCount(array $data): int
@@ -22,7 +22,7 @@ class TobogganTrajectory
     }
 
     /**
-     * @param array<array<int, string>> $data
+     * @param array<int, array<int, string>> $data
      * @return int
      */
     public static function findTreeCountsProducts(array $data): int
@@ -44,7 +44,7 @@ class TobogganTrajectory
     }
 
     /**
-     * @param array<array<int, string>> $data
+     * @param array<int, array<int, string>> $data
      * @param int $x
      * @param int $y
      * @param int $xStep

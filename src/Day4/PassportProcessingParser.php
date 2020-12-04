@@ -8,6 +8,9 @@ use Opmvpc\Advent\AbstractParser;
 
 class PassportProcessingParser extends AbstractParser
 {
+    /**
+     * @return array<int, array<string, string>>
+     */
     public function parse(): array
     {
         $explodedData = explode("\n\n", $this->fileContent);

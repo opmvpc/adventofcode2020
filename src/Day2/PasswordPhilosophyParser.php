@@ -8,6 +8,9 @@ use Opmvpc\Advent\AbstractParser;
 
 class PasswordPhilosophyParser extends AbstractParser
 {
+    /**
+     * @return array<int, PasswordDTO>
+     */
     public function parse(): array
     {
         $explodedData = explode("\n", $this->fileContent);
