@@ -8,7 +8,7 @@ class BinaryBoarding
 {
     /**
      * @psalm-pure
-     * @param array<string, string> $data
+     * @param array<int, array{column: false|string, row: false|string}> $data
      * @return int
      */
     public static function getMaxSeatId(array $data): int
@@ -21,7 +21,7 @@ class BinaryBoarding
 
     /**
      * @psalm-pure
-     * @param array<string, string> $data
+     * @param array<int, array{column: false|string, row: false|string}> $data
      * @return int
      */
     public static function getMySeatId(array $data): int
@@ -42,17 +42,17 @@ class BinaryBoarding
      */
     public static function nFirstIntSum(int $n): int
     {
-        return ($n * ($n + 1)) / 2;
+        return intval(($n * ($n + 1)) / 2);
     }
 
     /**
      * @psalm-pure
-     * @param array<string, string> $code
+     * @param array{column: false|string, row: false|string} $seatCode
      * @return int
      */
     public static function seatCodeToInt(array $seatCode): int
     {
-        $seatCode = array_map(fn (string $code) => static::binaryToInt($code), $seatCode);
+        $seatCode = array_map(fn ($code) => static::binaryToInt(strval($code)), $seatCode);
 
         return $seatCode['row'] * 8 + $seatCode['column'];
     }
@@ -67,6 +67,6 @@ class BinaryBoarding
         $code = preg_replace("/F|L/", "0", $code);
         $code = preg_replace("/B|R/", "1", $code);
 
-        return bindec($code);
+        return intval(bindec($code));
     }
 }

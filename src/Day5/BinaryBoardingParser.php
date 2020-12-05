@@ -9,7 +9,7 @@ use Opmvpc\Advent\AbstractParser;
 class BinaryBoardingParser extends AbstractParser
 {
     /**
-     * @return array<string, string>
+     * @return array<int, array{column: false|string, row: false|string}>
      */
     public function parse(): array
     {
