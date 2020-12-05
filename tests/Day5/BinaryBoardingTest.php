@@ -23,4 +23,12 @@ class BinaryBoardingTest extends TestCase
         $result = BinaryBoarding::getMaxSeatId($data);
         $this->assertEquals(816, $result);
     }
+
+    /** @test */
+    public function resultPart2()
+    {
+        $data = (new BinaryBoardingParser(__DIR__ . '/BinaryBoardingData.txt'))->parse();
+        $result = BinaryBoarding::getMySeatId($data);
+        $this->assertEquals(539, $result);
+    }
 }
