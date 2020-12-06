@@ -4,38 +4,36 @@ declare(strict_types=1);
 
 namespace Opmvpc\Advent\Day5;
 
+use Opmvpc\Advent\DataStructures\Collection;
+
 class BinaryBoarding
 {
     /**
-     * @psalm-pure
-     * @param array<int, array{column: false|string, row: false|string}> $data
+     * @param Collection $data
      * @return int
      */
-    public static function getMaxSeatId(array $data): int
+    public static function getMaxSeatId(Collection $data): int
     {
-        $transformedData = array_map('static::seatCodeToInt', $data);
-
-        return max($transformedData);
+        return $data->map(fn (Collection $seatCodes) => static::seatCodeToInt($seatCodes))
+            ->max();
     }
 
     /**
-     * @psalm-pure
-     * @param array<int, array{column: false|string, row: false|string}> $data
+     * @param Collection $data
      * @return int
      */
-    public static function getMySeatId(array $data): int
+    public static function getMySeatId(Collection $data): int
     {
-        $transformedData = array_map('static::seatCodeToInt', $data);
+        $transformedData = $data->map(fn (Collection $seatCodes) => static::seatCodeToInt($seatCodes));
 
-        $min = min($transformedData);
-        $max = max($transformedData);
-        $total = array_sum($transformedData);
+        $min = $transformedData->min();
+        $max = $transformedData->max();
+        $total = $transformedData->sum();
 
         return static::nFirstIntSum($max) - static::nFirstIntSum($min - 1) - $total;
     }
 
     /**
-     * @psalm-pure
      * @param int $n
      * @return int
      */
@@ -45,19 +43,17 @@ class BinaryBoarding
     }
 
     /**
-     * @psalm-pure
-     * @param array{column: false|string, row: false|string} $seatCode
+     * @param Collection $seatCode
      * @return int
      */
-    public static function seatCodeToInt(array $seatCode): int
+    public static function seatCodeToInt(Collection $seatCode): int
     {
-        $seatCode = array_map(fn ($code) => static::binaryToInt(strval($code)), $seatCode);
+        $seatCode = $seatCode->map(fn (string $code) => static::binaryToInt(strval($code)));
 
-        return $seatCode['row'] * 8 + $seatCode['column'];
+        return ($seatCode['row'] ?? 0) * 8 + ($seatCode['column'] ?? 0);
     }
 
     /**
-     * @psalm-pure
      * @param string $code
      * @return int
      */

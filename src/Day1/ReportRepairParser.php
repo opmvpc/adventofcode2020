@@ -5,14 +5,13 @@ declare(strict_types=1);
 namespace Opmvpc\Advent\Day1;
 
 use Opmvpc\Advent\AbstractParser;
+use Opmvpc\Advent\DataStructures\Collection;
 
 class ReportRepairParser extends AbstractParser
 {
-    public function parse(): array
+    public function parse(): Collection
     {
-        $explodedData = explode("\n", $this->fileContent);
-        $filteredData = array_filter($explodedData, fn ($number) => $number !== '');
-
-        return $filteredData;
+        return Collection::make(explode("\n", $this->fileContent))
+            ->filter();
     }
 }

@@ -4,14 +4,16 @@ declare(strict_types=1);
 
 namespace Opmvpc\Advent\Day1;
 
+use Opmvpc\Advent\DataStructures\Collection;
+
 class ReportRepair
 {
     /**
-     * @param array<int> $data
+     * @param Collection $data
      * @param int $numbersCount
      * @return int
      */
-    public static function result(array $data, int $numbersCount): int
+    public static function result(Collection $data, int $numbersCount): int
     {
         if ($numbersCount === 2) {
             $foundNumbers = static::find2NumbersWhereSumEquals2020($data);
@@ -19,14 +21,14 @@ class ReportRepair
             $foundNumbers = static::find3NumbersWhereSumEquals2020($data);
         }
 
-        return static::multiplication($foundNumbers);
+        return Collection::make($foundNumbers)->product();
     }
 
     /**
-     * @param array<int> $data
+     * @param Collection $data
      * @return array<int>
      */
-    public static function find2NumbersWhereSumEquals2020(array $data): array
+    public static function find2NumbersWhereSumEquals2020(Collection $data): array
     {
         $result = [];
         foreach ($data as $number) {
@@ -42,10 +44,10 @@ class ReportRepair
     }
 
     /**
-     * @param array<int> $data
+     * @param Collection $data
      * @return array<int>
      */
-    public static function find3NumbersWhereSumEquals2020(array $data): array
+    public static function find3NumbersWhereSumEquals2020(Collection $data): array
     {
         $result = [];
         foreach ($data as $number) {
@@ -61,14 +63,5 @@ class ReportRepair
         }
 
         return $result;
-    }
-
-    /**
-     * @param array<int> $data
-     * @return int
-     */
-    public static function multiplication(array $data): int
-    {
-        return array_reduce($data, fn (int $acc, int $number) => $acc * $number, 1);
     }
 }

@@ -5,18 +5,18 @@ declare(strict_types=1);
 namespace Opmvpc\Advent\Day2;
 
 use Opmvpc\Advent\AbstractParser;
+use Opmvpc\Advent\DataStructures\Collection;
 
 class PasswordPhilosophyParser extends AbstractParser
 {
     /**
-     * @return array<int, PasswordDTO>
+     * @return Collection
      */
-    public function parse(): array
+    public function parse(): Collection
     {
-        $explodedData = explode("\n", $this->fileContent);
-        $filteredData = array_filter($explodedData, fn ($line) => $line !== '');
-
-        return array_map('static::createPasswordDTO', $filteredData);
+        return Collection::make(explode("\n", $this->fileContent))
+            ->filter()
+            ->map(fn (string $line) => static::createPasswordDTO($line));
     }
 
     public static function createPasswordDTO(string $line): PasswordDTO

@@ -41,19 +41,16 @@ class PasswordPhilosophyTest extends TestCase
     /** @test */
     public function passwordsOkCount()
     {
-        $result = PasswordPhilosophy::passwordOkCount($this->getTestData());
+        $data = (new PasswordPhilosophyParser(__DIR__ . '/PasswordPhilosophyData.txt'))->parse();
+        $result = PasswordPhilosophy::passwordOkCount($data);
         $this->assertEquals(439, $result);
     }
 
     /** @test */
     public function passwordsPartTwoOkCount()
     {
-        $result = PasswordPhilosophyPartTwo::passwordOkCount($this->getTestData());
+        $data = (new PasswordPhilosophyParser(__DIR__ . '/PasswordPhilosophyData.txt'))->parse();
+        $result = PasswordPhilosophyPartTwo::passwordOkCount($data);
         $this->assertEquals(584, $result);
-    }
-
-    private function getTestData(): array
-    {
-        return (new PasswordPhilosophyParser(__DIR__ . '/PasswordPhilosophyData.txt'))->parse();
     }
 }

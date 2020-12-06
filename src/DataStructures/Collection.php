@@ -5,52 +5,30 @@ declare(strict_types=1);
 namespace Opmvpc\Advent\DataStructures;
 
 use ArrayAccess;
+use ArrayIterator;
 use Countable;
-use Iterator;
-use Traversable;
+use IteratorAggregate;
 
 /**
  * @psalm-consistent-constructor
  */
-class Collection implements ArrayAccess, Iterator, Traversable, Countable
+class Collection implements ArrayAccess, IteratorAggregate, Countable
 {
     private array $elements = [];
-
-    private int $position = 0;
 
     public function __construct(array $array = [])
     {
         $this->elements = $array;
     }
 
+    public function getIterator(): ArrayIterator
+    {
+        return new ArrayIterator($this->elements);
+    }
+
     public static function make(array $array = []): self
     {
         return new static($array);
-    }
-
-    public function current(): int
-    {
-        return $this->position;
-    }
-
-    public function next(): void
-    {
-        ++$this->position;
-    }
-
-    public function key(): int
-    {
-        return $this->position;
-    }
-
-    public function valid(): bool
-    {
-        return isset($this->elements[$this->position]);
-    }
-
-    public function rewind(): void
-    {
-        $this->position = 0;
     }
 
     /**
@@ -187,5 +165,20 @@ class Collection implements ArrayAccess, Iterator, Traversable, Countable
     public function last()
     {
         return $this->elements[count($this->elements) - 1] ?? null;
+    }
+
+    public function flatten(): self
+    {
+        return new static(array_merge(...$this->elements));
+    }
+
+    public function keys(): array
+    {
+        return array_keys($this->elements);
+    }
+
+    public function isEmpty(): bool
+    {
+        return $this->count() === 0;
     }
 }

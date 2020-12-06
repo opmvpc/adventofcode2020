@@ -5,17 +5,17 @@ declare(strict_types=1);
 namespace Opmvpc\Advent\Day5;
 
 use Opmvpc\Advent\AbstractParser;
+use Opmvpc\Advent\DataStructures\Collection;
 
 class BinaryBoardingParser extends AbstractParser
 {
     /**
-     * @return array<int, array{column: false|string, row: false|string}>
+     * @return Collection
      */
-    public function parse(): array
+    public function parse(): Collection
     {
-        $explodedData = explode("\n", $this->fileContent);
-        $filteredData = array_filter($explodedData, fn ($line) => $line !== '');
-
-        return array_map(fn (string $line) => ['row' => substr($line, 0, 7), 'column' => substr($line, 7, 3)], $filteredData);
+        return Collection::make(explode("\n", $this->fileContent))
+            ->filter()
+            ->map(fn (string $line) => Collection::make(['row' => substr($line, 0, 7), 'column' => substr($line, 7, 3)]));
     }
 }

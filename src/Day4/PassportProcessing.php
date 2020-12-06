@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Opmvpc\Advent\Day4;
 
+use Opmvpc\Advent\DataStructures\Collection;
+
 class PassportProcessing
 {
     private static array $requiredFields = [
@@ -17,64 +19,64 @@ class PassportProcessing
     ];
 
     /**
-     * @param array<int, array<string, string>> $data
+     * @param Collection $data
      * @return int
      */
-    public static function findWellFormedPassportsCount(array $data): int
+    public static function findWellFormedPassportsCount(Collection $data): int
     {
-        $validPassports = array_filter($data, fn (array $passport) => static::hasRequiredFieldsPassport($passport));
-
-        return count($validPassports);
+        return $data
+            ->filter(fn (Collection $passport) => static::hasRequiredFieldsPassport($passport))
+            ->count();
     }
 
     /**
-     * @param array<int, array<string, string>> $data
+     * @param Collection $data
      * @return int
      */
-    public static function findValidPassportsCount(array $data): int
+    public static function findValidPassportsCount(Collection $data): int
     {
-        $validPassports = array_filter($data, fn (array $passport) => static::hasRequiredFieldsPassport($passport));
-        $validPassports = array_filter($validPassports, fn (array $passport) => static::isValidPassport($passport));
-
-        return count($validPassports);
+        return $data
+            ->filter(fn (Collection $passport) => static::hasRequiredFieldsPassport($passport))
+            ->filter(fn (Collection $passport) => static::isValidPassport($passport))
+            ->count();
     }
 
     /**
-     * @param array<string, string> $passport
+     * @param Collection $passport
      * @return bool
      */
-    public static function hasRequiredFieldsPassport(array $passport): bool
+    public static function hasRequiredFieldsPassport(Collection $passport): bool
     {
-        $dif = array_filter(static::$requiredFields, fn (string $requiredKey) => ! in_array($requiredKey, array_keys($passport)));
-
-        return count($dif) === 0;
+        return Collection::make(static::$requiredFields)
+            ->filter(fn (string $requiredKey) => ! in_array($requiredKey, $passport->keys()))
+            ->isEmpty();
     }
 
     /**
-     * @param array<string, string> $passport
+     * @param Collection $passport
      * @return bool
      */
-    public static function isValidPassport(array $passport): bool
+    public static function isValidPassport(Collection $passport): bool
     {
-        if (strlen($passport['byr']) !== 4 || $passport['byr'] < 1920 || $passport['byr'] > 2002) {
+        if (strlen($passport['byr'] ?? '') !== 4 || $passport['byr'] < 1920 || $passport['byr'] > 2002) {
             return false;
         }
 
-        if (strlen($passport['iyr']) !== 4 || $passport['iyr'] < 2010 || $passport['iyr'] > 2020) {
+        if (strlen($passport['iyr'] ?? '') !== 4 || $passport['iyr'] < 2010 || $passport['iyr'] > 2020) {
             return false;
         }
 
-        if (strlen($passport['eyr']) !== 4 || $passport['eyr'] < 2020 || $passport['eyr'] > 2030) {
+        if (strlen($passport['eyr'] ?? '') !== 4 || $passport['eyr'] < 2020 || $passport['eyr'] > 2030) {
             return false;
         }
 
-        if (str_contains($passport['hgt'], 'cm')) {
-            $heightVal = intval(str_replace('cm', '', $passport['hgt']));
+        if (str_contains($passport['hgt'] ?? '', 'cm')) {
+            $heightVal = intval(str_replace('cm', '', $passport['hgt'] ?? ''));
             if (! ($heightVal >= 150 && $heightVal <= 193)) {
                 return false;
             }
-        } elseif (str_contains($passport['hgt'], 'in')) {
-            $heightVal = intval(str_replace('in', '', $passport['hgt']));
+        } elseif (str_contains($passport['hgt'] ?? '', 'in')) {
+            $heightVal = intval(str_replace('in', '', $passport['hgt'] ?? ''));
             if (! ($heightVal >= 59 && $heightVal <= 76)) {
                 return false;
             }
@@ -82,7 +84,7 @@ class PassportProcessing
             return false;
         }
 
-        if (! preg_match('/^#([a-f]|[0-9]){6}$/', $passport['hcl'])) {
+        if (! preg_match('/^#([a-f]|[0-9]){6}$/', $passport['hcl'] ?? '')) {
             return false;
         }
 
@@ -90,7 +92,7 @@ class PassportProcessing
             return false;
         }
 
-        if (! preg_match('/^\d{9}$/', $passport['pid'])) {
+        if (! preg_match('/^\d{9}$/', $passport['pid'] ?? '')) {
             return false;
         }
 

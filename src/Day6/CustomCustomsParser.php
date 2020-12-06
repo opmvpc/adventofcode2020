@@ -14,9 +14,7 @@ class CustomCustomsParser extends AbstractParser
      */
     public function parse(): Collection
     {
-        $explodedData = explode("\n\n", $this->fileContent);
-
-        return Collection::make($explodedData)
+        return Collection::make(explode("\n\n", $this->fileContent))
             ->filter();
     }
 }

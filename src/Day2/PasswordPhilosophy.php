@@ -4,15 +4,19 @@ declare(strict_types=1);
 
 namespace Opmvpc\Advent\Day2;
 
+use Opmvpc\Advent\DataStructures\Collection;
+
 class PasswordPhilosophy
 {
     /**
-     * @param array<int, PasswordDTO> $passwords
+     * @param Collection $passwords
      * @return int
      */
-    public static function passwordOkCount(array $passwords): int
+    public static function passwordOkCount(Collection $passwords): int
     {
-        return array_reduce($passwords, fn (int $acc, PasswordDTO $passwordData) => $acc + intval(static::isPasswordOk($passwordData)), 0);
+        return $passwords
+            ->map(fn (PasswordDTO $passwordData) => intval(static::isPasswordOk($passwordData)))
+            ->sum();
     }
 
     /**

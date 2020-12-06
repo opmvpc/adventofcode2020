@@ -11,7 +11,7 @@ class PassportProcessingTest extends TestCase
     /** @test */
     public function knownResultPart1()
     {
-        $data = (new PassportProcessingParser(__DIR__ . '/PassportProcessingData2.txt'))->parse();
+        $data = (new PassportProcessingParser(__DIR__ . '/PassportProcessingTestData.txt'))->parse();
         $result = PassportProcessing::findWellFormedPassportsCount($data);
         $this->assertEquals(2, $result);
     }
@@ -27,7 +27,7 @@ class PassportProcessingTest extends TestCase
     /** @test */
     public function knownResultPart2()
     {
-        $data = (new PassportProcessingParser(__DIR__ . '/PassportProcessingData3.txt'))->parse();
+        $data = (new PassportProcessingParser(__DIR__ . '/PassportProcessingTestData2.txt'))->parse();
         $result = PassportProcessing::findValidPassportsCount($data);
         $this->assertEquals(4, $result);
     }
