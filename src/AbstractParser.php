@@ -1,9 +1,10 @@
 <?php
 
-
 declare(strict_types=1);
 
 namespace Opmvpc\Advent;
+
+use Opmvpc\Advent\DataStructures\Collection;
 
 abstract class AbstractParser
 {
@@ -17,7 +18,10 @@ abstract class AbstractParser
         $this->fileContent();
     }
 
-    abstract public function parse(): array;
+    /**
+     * @return Collection|array
+     */
+    abstract public function parse();
 
     private function fileContent(): void
     {

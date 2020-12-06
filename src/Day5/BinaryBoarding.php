@@ -16,7 +16,6 @@ class BinaryBoarding
         $transformedData = array_map('static::seatCodeToInt', $data);
 
         return max($transformedData);
-        ;
     }
 
     /**
