@@ -31,4 +31,12 @@ class CustomCustomsTest extends TestCase
         $result = CustomCustoms::getSamePositiveAnswersSum($data);
         $this->assertEquals(6, $result);
     }
+
+    /** @test */
+    public function resultPart2()
+    {
+        $data = (new CustomCustomsParser(__DIR__ . '/CustomCustomsData.txt'))->parse();
+        $result = CustomCustoms::getSamePositiveAnswersSum($data);
+        $this->assertEquals(3406, $result);
+    }
 }

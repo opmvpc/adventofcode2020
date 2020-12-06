@@ -140,6 +140,10 @@ class Collection implements ArrayAccess, Iterator, Traversable, Countable
         return new Collection(array_map($callable, $this->elements));
     }
 
+    /**
+     * @param callable $callable
+     * @return mixed
+     */
     public function reduce(callable $callable)
     {
         return array_reduce($this->elements, $callable);
@@ -169,11 +173,17 @@ class Collection implements ArrayAccess, Iterator, Traversable, Countable
         return new static(array_intersect(...$this->elements));
     }
 
+    /**
+     * @return mixed|null
+     */
     public function first()
     {
         return $this->elements[0] ?? null;
     }
 
+    /**
+     * @return mixed|null
+     */
     public function last()
     {
         return $this->elements[count($this->elements) - 1] ?? null;

@@ -10,7 +10,6 @@ use Opmvpc\Advent\DataStructures\Collection;
 class CustomCustoms
 {
     /**
-     * @psalm-pure
      * @param Collection $data
      * @return int
      */
@@ -25,7 +24,6 @@ class CustomCustoms
     }
 
     /**
-     * @psalm-pure
      * @param Collection $data
      * @return int
      */
