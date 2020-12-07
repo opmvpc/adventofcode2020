@@ -9,22 +9,6 @@ use PHPUnit\Framework\TestCase;
 class ReportRepairTest extends TestCase
 {
     /** @test */
-    public function addition2NumbersResultIs2020()
-    {
-        $data = (new ReportRepairParser(__DIR__ . '/ReportRepairData.txt'))->parse();
-        $result = ReportRepair::find2NumbersWhereSumEquals2020($data);
-        $this->assertEquals(2020, array_sum($result));
-    }
-
-    /** @test */
-    public function addition3NumbersResultIs2020()
-    {
-        $data = (new ReportRepairParser(__DIR__ . '/ReportRepairData.txt'))->parse();
-        $result = ReportRepair::find3NumbersWhereSumEquals2020($data);
-        $this->assertEquals(2020, array_sum($result));
-    }
-
-    /** @test */
     public function getResult2Numbers()
     {
         $data = (new ReportRepairParser(__DIR__ . '/ReportRepairData.txt'))->parse();
